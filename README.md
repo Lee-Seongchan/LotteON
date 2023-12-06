@@ -9,11 +9,21 @@
 
 ### 맡은 업무 및 역활 
 [팀장] 윤경엽 : 상품보기, 장바구니, 주문하기, 상품관련 페이지
+
 [팀원] 이성찬 : 고객센터, 공지사항, CS/ 메인 마이페이지, 회사소개, 관리자 페이지 오류 수정, 개발 보고서 작성
+
 [팀원] 박원빈 : 관리자 페이지 상품 등록, 상품 목록, 개발 보고서 작성
+
 [팀원] 박한산 : 로그인, 회원가입, 약관안내, PPT제작
 
-페이지 소개 [메인 페이지]
-![롯데ON](https://github.com/Lee-Seongchan/LotteON/assets/100086310/77bce48c-d545-41cb-8ec0-d72961ffb229)
+---
+
+페이지 소개 <br>
 
 
+
+1. [메인 페이지] 
+![롯데ON](https://github.com/Lee-Seongchan/LotteON/assets/100086310/77bce48c-d545-41cb-8ec0-d72961ffb229)<br><br>
+
+2. [고객센터 페이지]
+![고객센터 페이지](https://github.com/Lee-Seongchan/LotteON/assets/100086310/cc26063c-9d5d-4eed-96cf-65632ee33a4c)
