@@ -77,3 +77,37 @@
 1.회사메인 소개 기능
 
 2.홍보채널 기능
+
+### 개발환경 
+OS : Window10
+
+
+Framework : Spring Boot 3.2.0
+
+
+Language : Java 17, HTML5, CSS3, Javascript, jQuery 3.1
+
+
+DBMS : MySQL 8.0
+
+Library :
+
+activation-1.x.x.jar
+
+cos-05Nov2002.jar
+
+gson-2.9.1.jar
+
+javax.mail-1.6.2.jar
+
+javax.mail-api-1.6.2.jar
+
+jstl-1.2.jar
+
+logback-classic-1.4.4.jar
+
+logback-core-1.4.4.jar
+
+mysql-connector-java-8.0.29.jar
+
+slf4j-api-2.0.3.jar
