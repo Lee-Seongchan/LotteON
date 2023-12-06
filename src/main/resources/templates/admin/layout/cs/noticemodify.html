@@ -1,0 +1,44 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="/admin/index.html">
+ <section id="admin-cs-view" layout:fragment="content">
+	     <nav>
+	            <h3>공지사항</h3>
+	            <p>
+	                HOME > 게시판관리 > <strong>공지사항</strong>
+	            </p>
+	        </nav>
+	    <article>
+            <form th:action="@{/admin/layout/cs/noticemodify}" method="post">
+      			<input type="hidden" name="no" th:value="${noticemodify.no}" />
+                <section>
+                    <table>
+                    	<tr>
+							<td>공지유형</td>
+							<td>
+								<!-- type1은 회원게시판에서 클릭했을 시 회원으로 설정되게끔. -->
+								<select name="cate1" id="boardCate1">
+									<option value="0">1차 선택</option>
+										<option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:selected="${cate1 eq selectedCate1}" th:text="${cate1.cate1_name}"></option>
+								</select>
+							</td>
+						</tr>
+                    </table>
+                </section>
+                <section>
+                    <table>
+                        <tr>
+                            <td>제목</td>
+                            <td><textarea class="csTitle" name="title" placeholder="제목을 입력하세요">[[${noticemodify.title}]]</textarea></td>
+                        </tr>
+                        <tr>
+                            <td>내용</td>
+                            <td><textarea class="csArea" name="content" placeholder="내용을 입력하세요.">[[${noticemodify.content}]]</textarea></td>
+                        </tr>
+                    </table>
+                </section>
+                <input type="submit" value="등록하기" class="csRegister">
+            </form>
+        </article>
+	</section>

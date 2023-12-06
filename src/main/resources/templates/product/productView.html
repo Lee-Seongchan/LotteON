@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+	  layout:decorate="/side.html">
+	<head>
+	<script src="../js/product/viewCount.js"></script>
+
+	</head>
+
+              <!-- 상품 상세페이지 시작 -->
+              <section layout:fragment="content" class="view">
+                <!-- 제목, 페이지 네비게이션 -->
+                <nav>
+                    <h1>상품보기</h1>
+                    <p>
+                        HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong>
+                    </p>
+                </nav>
+
+                <!-- 상품 전체 정보 내용 -->                
+                <article class="info">
+                    <div class="image">
+                        <img th:src="@{'/thumb1/'+${dto.thumb3}}" alt="상품이미지"/>
+                    </div>
+                    <div class="summary">
+						
+                        <nav>
+                            <h1>(주)[[${dto.company}]]</h1>
+                            <h2>상품번호&nbsp;:&nbsp;<span>[[${dto.prodNo}]]</span></h2>
+                        </nav>                        
+                        <nav>
+                            <h3>[[${dto.prodName}]]</h3>
+                            <p>[[${dto.descript}]]</p>
+                            <h5 class="rating star4"><a href="#">상품평보기</a></h5>
+                        </nav>
+                        <nav>
+                            <div class="org_price">
+                                <del>[[${#numbers.formatInteger(dto.price,0,'COMMA')}]]</del>
+                                <span>[[${dto.discount}]]%</span>
+                            </div>
+                            <div class="dis_price">
+                                <ins>[[${#numbers.formatInteger(dto.price - ((dto.price * dto.discount)/100),0,'COMMA')}]]</ins>
+                                <input type="hidden" class="productdisprice" th:value="${dto.price - ((dto.price * dto.discount)/100)}">
+                            </div>
+                        </nav>
+                        <nav>
+                            <span class="delivery">[[${dto.delivery eq 0 ? '무료배송' : '배송비 ' + #numbers.formatInteger(dto.delivery,0,'COMMA') + ' 원'}]]</span> <!--[[${#numbers.formatInteger(dto.delivery,0,'COMMA')}]] -->
+                            <span class="arrival">[[${formatedNow}]] 도착예정</span>
+                            <span class="desc">본 상품은 국내배송만 가능합니다.</span>
+                        </nav>
+                        <nav>
+                            <span class="card cardfree"><i>아이콘</i>무이자할부</span>&nbsp;&nbsp;
+                            <span class="card cardadd"><i>아이콘</i>카드추가혜택</span>
+                        </nav>
+                        <nav>
+                            <span class="origin">원산지-상세설명 참조</span>
+                        </nav>
+                        <img src="../images/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립!" class="banner" />
+                        
+                        <div class="count">
+                            <button class="decrease">-</button>
+                            <input type="text" name="count" value="1"/>
+                            <button class="increase">+</button>
+                        </div>
+                        
+                        <div class="total">
+                            <span class="totalPrice">[[${#numbers.formatInteger(dto.price - ((dto.price * dto.discount)/100),0,'COMMA')}]]</span>
+                            <input type="hidden" class="tot" name="totalPrice" th:value="${dto.price - ((dto.price * dto.discount)/100)}"
+                            <em>총 상품금액</em>
+                        </div>
+						<form th:action="@{/product/productCart}" class="buy" method="post">
+                        <div class="button">
+                            <input type="submit" class="cart"  value="장바구니"/>
+                            <input type="submit" class="order" value="구매하기"/>
+                        </div>
+                        <input type="hidden" name="count" value="1"/>
+                        <input type="hidden" name="delivery" th:value="${dto.delivery}"/>
+                        <input type="hidden" name="discount" th:value="${dto.discount}"/>
+                        <input type="hidden" name="point" th:value="${dto.point}"/>
+                        <input type="hidden" name="price" th:value="${dto.price}"/>
+                        <input type="hidden" name="product" th:value="${dto.prodNo}"/>
+                        <input type="hidden" name="user" value="seller1"/>
+                        <input type="hidden" name="tot" th:value="${dto.price}"/>
+                      
+                        </form>
+                    </div>
+                </article>
+				
+                <!-- 상품 정보 내용 -->
+                <article class="detail">
+                    <nav>
+                        <h1>상품정보</h1>
+                    </nav>
+                    <!-- 상품상세페이지 이미지 -->
+                    <img th:src="@{'/thumb1/'+${dto.detail}}" alt="상세페이지1">
+                   
+                </article>
+
+                <!-- 상품 정보 제공 고시 내용 -->
+                <article class="notice">
+                    <nav>
+                        <h1>상품 정보 제공 고시</h1>
+                        <p>[전자상거래에 관한 상품정보 제공에 관한 고시] 항목에 의거 등록된 정보입니다.</p>
+                    </nav>
+                    <table border="0">
+                        <tr>
+                            <td>상품번호</td>
+                            <td>10110125435</td>
+                        </tr>
+                        <tr>
+                            <td>상품상태</td>
+                            <td>새상품</td>
+                        </tr>
+                        <tr>
+                            <td>부가세 면세여부</td>
+                            <td>과세상품</td>
+                        </tr>
+                        <tr>
+                            <td>영수증발행</td>
+                            <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                        </tr>
+                        <tr>
+                            <td>사업자구분</td>
+                            <td>사업자 판매자</td>
+                        </tr>
+                        <tr>
+                            <td>브랜드</td>
+                            <td>블루포스</td>
+                        </tr>
+                        <tr>
+                            <td>원산지</td>
+                            <td>국내생산</td>
+                        </tr>
+                    </table>
+                    <table border="0">
+                        <tr>
+                            <td>제품소재</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>색상</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>치수</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>제조자/수입국</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>제조국</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>취급시 주의사항</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>제조연월</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>품질보증기준</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>A/S 책임자와 전화번호</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>주문후 예상 배송기간</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">구매, 교환, 반품, 배송, 설치 등과 관련하여 추가비용, 제한조건 등의 특이사항이 있는 경우</td>
+                        </tr>
+                    </table>
+                    <p class="notice">
+                        소비자가 전자상거래등에서 소비자 보호에 관한 법률 제 17조 제1항 또는 제3항에 따라 청약철회를 하고
+                        동법 제 18조 제1항 에 따라 청약철회한 물품을 판매자에게 반환하였음에도 불구 하고 결제 대금의
+                        환급이 3영업일을 넘게 지연된 경우, 소비자 는 전자상거래등에서 소비자보호에 관한 법률 제18조
+                        제2항 및 동법 시행령 제21조 2에 따라 지연일수에 대하여 전상법 시행령으로 정하는 이율을 곱하여
+                        산정한 지연이자(“지연배상금”)를 신청할 수 있습니다. 아울러, 교환∙반품∙보증 및 결제대금의
+                        환급신청은 [나의쇼핑정보]에서 하실 수 있으며, 자세한 문의는 개별 판매자에게 연락하여 주시기 바랍니다.
+                    </p>
+                </article>
+                
+                <!-- 상품 리뷰 내용 -->
+                <article class="review">
+                    <nav>
+                        <h1>상품리뷰</h1>
+                    </nav>
+                    <ul>
+                        <li th:each="list:${review}">
+                            <div>
+                                <h5 th:class="@{rating star}+${list.score}">상품평</h5>
+                                <span>[[${#strings.substring(list.user.uid, 0, 3) + '***'}]] [[${#temporals.format(list.regDate, 'yyyy-MM-dd')}]]</span>
+                            </div>
+                            <h3>[[${list.product.prodName}]]</h3>
+                            <p>
+                                [[${list.content}]]
+                            </p>
+                        </li>
+                      
+                    </ul>
+                    <div class="paging">
+
+                        <span class="num">
+                            <a href="#" class="on">1</a>
+
+                        </span>
+
+                    </div>
+                </article>
+            </section>
+        

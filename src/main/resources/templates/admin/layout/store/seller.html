@@ -1,0 +1,55 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/admin/index.html">
+<section id="admin-product-list" layout:fragment="content">
+    <nav>
+        <h3>판매자현황</h3>
+        <p>
+            HOME > 상점관리 > <strong>판매자현황</strong>
+        </p>
+    </nav>
+    <!-- 상품목록 컨텐츠 시작 -->                                
+    <section>
+        <table>
+            <tr>
+                <th>회사명</th>
+                <th>대표자</th>
+                <th>회사 등록 번호</th>
+                <th>사업자 등록 번호</th>
+                <th>관리자명</th>
+                <th>관리자 휴대폰 번호</th>
+                <th>사무실 전화 번호</th>
+                <th>가입일</th>
+                <th>관리</th>
+            </tr>
+			
+            <tr class="row" th:each="sellerlist : ${sellerlist}">
+                <td style="text-align:center; width:5%">[[${sellerlist.company}]]</td>
+                <td style="text-align:center; width:5%" th:text="${sellerlist.ceo}"></td>
+                <td style="text-align:center; width:10%" th:if="${sellerlist.comRegNum}"></td>
+                <td style="text-align:center; width:10%" th:text="${sellerlist.bizRegNum}"></td>
+                <td style="text-align:center; width:10%" th:text="${sellerlist.manager}"></td>
+                <td style="text-align:center; width:10%" th:text="${sellerlist.managerHp}"></td>
+                <td style="text-align:center; width:20%" th:text="${sellerlist.tel}"></td>
+                <td style="text-align:center; width:10%" th:text="${#temporals.format(sellerlist.rdate, 'yy-MM-dd')}"></td>
+                <td style="text-align:center; width:10%">
+                    <a href="#" class="userDelete">[정지]</a>
+                </td>
+            </tr>
+        </table>
+
+		<div class="paging">
+	        <span th:if="${pageStartNum > 1}">
+	            <a th:href="@{/admin/layout/store/seller(pg=${pageStartNum - 1})}" >이전</a>
+	        </span>
+	        <span th:each="page : ${#numbers.sequence(1, totalPages)}" class="num">
+	            <a th:href="@{/admin/layout/store/seller(pg=${page})}" th:text="${page}"></a>
+	        </span>
+	        <span th:if="${pageEndNum < totalPages}" class="next">
+	            <a th:href="@{/admin/layout/store/seller(pg=${pageEndNum + 1})}" >다음</a>
+	        </span>
+		</div>
+
+    </section>                
+</html>

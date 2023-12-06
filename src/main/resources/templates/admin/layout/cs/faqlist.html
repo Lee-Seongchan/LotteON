@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/admin/index.html" >
+      <head>
+      <script>
+		  $(document).ready(function(){
+		  		document.querySelector('#faqboardCate2').addEventListener('change', function () {
+				    var selectedCate1 = document.querySelector('#faqboardCate1').value;
+				    var selectedCate2 = this.value;
+				    window.location.href = `/admin/layout/cs/faqlist?cate1=${selectedCate1}&cate2=${selectedCate2}`;
+					 
+				});
+		  });
+	  </script>
+	  </head>
+       <section id="admin-cs-list" layout:fragment="content">
+        <nav>
+            <h3>자주묻는 질문</h3>
+            <p>
+                HOME > 고객센터 > <strong>자주묻는질문</strong>
+            </p>
+        </nav>
+        <section>
+            <div>
+				<!-- type1은 회원게시판에서 클릭했을 시 회원으로 설정되게끔. -->
+				<select name="cate1" id="faqboardCate1">
+					<option value="0">1차 선택</option>
+						<option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:selected="${cate1 eq selectedCate1}" th:text="${cate1.cate1_name}"></option>
+				</select>
+				<!--  type2는 jsonData로 받아와서 동적처리. -->
+				<select name="cate2" id="faqboardCate2">
+					<option value="0">2차 선택</option>
+						<option th:each="cate2 : ${cate2List}" th:value="${cate2.cate2}" th:text="${cate2.cate2_name}"></option>
+				</select>
+            </div>
+            <table>
+                <tr>
+                    <th><input type="checkbox" name="all"></th>
+                    <th>번호</th>
+                    <th>1차 유형</th>
+                    <th>2차 유형</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                    <th>관리</th>
+                </tr>
+			
+				<tr class="row" th:each="faqlist : ${faqlist}">
+                    <td style="text-align:center; width:5%"><input type="checkbox" name="chk"></td>
+                    <td style="text-align:center; width:5%">[[${faqlist.no}]]</td>
+                    <td style="text-align:center; width:10%">[[${faqlist.f}]]</td>
+                    <td style="text-align:center; width:10%">[[${faqlist.f2}]]</td>
+                    <td style="text-align:center; width:40%"><a th:href="@{/admin/layout/cs/faqview(no=${faqlist.no})}">[[${faqlist.title}]]</a></td>
+                   	<td style="text-align:center; width:10%">[[${#temporals.format(faqlist.rdate, 'yy-MM-dd')}]]</td>
+                    <td style="text-align:center; width:20%">
+						<a th:href="@{/admin/layout/cs/faqmodify(no=${faqlist.no})}" class="faqModify">[수정]</a>
+                        <a href="#" class="faqDelete">[삭제]</a>
+                    </td>                   
+                </tr>
+            </table>
+            
+            <input type="button" value="선택 삭제" class="csDelete"/>
+            <input type="button" value="글 작성" class="faqWrite"/>
+            
+        </section>
+    </section>
+</html>

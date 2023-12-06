@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">    
+    <title>롯데ON::대한민국 1등 온라인 쇼핑몰</title>    
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script> 
+      <script src="../js/jquery.star-rating-svg.min.js"></script>
+    <script src="../js/popup.js"></script>   
+    <link rel="stylesheet" href="../css/my/style.css">
+    <link rel="stylesheet" href="../css/my/star-rating-svg.css">
+    <!-- myInfo -->
+    <script src="../js/myInfo.js"></script> 
+    <script src="../js/nowDate.js"></script> 
+    <script src="../member/js/zipcode.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <div class="top">
+                <div>
+                    <a th:href="@{/member/login}">로그인</a>
+                    <a th:href="@{/member/join}">회원가입</a>
+                    <a th:href="@{/my/}">마이페이지</a>
+                    <a th:href="@{/product/productCart}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                </div>
+            </div>
+            <div class="logo">
+                <div>
+                    <a th:href="@{/}"><img src="../images/header_logo.png" alt="로고"/></a>
+                    <form action="#">
+                        <input type="text" name="search"/>
+                        <button><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <div id="my">
+            <nav>
+                <div>
+                    <a th:href="@{/my/}"><img src="../images/my_logo.jpg" alt="나의쇼핑정보"></a>
+                    <ol>
+                        <li><a th:href="@{/my/order}">주문·배송<span class="delivery">[[${count}]]</span></a></li>
+                        <li><a th:href="@{/my/coupon}">할인쿠폰<span class="coupon">2</span></a></li>
+                        <li><a th:href="@{/my/point}">포인트<span class="point">[[${point}]]</span></a></li>
+                        <li><a th:href="@{/my/qna}">문의내역<span class="qna">1</span></a></li>
+                    </ol>
+                </div>
+            </nav>
+
+</html>

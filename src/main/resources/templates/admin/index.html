@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>케이마켓::관리자</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>    
+    <script src="/LotteON/js/admin/gnb.js"></script>
+    <script src="/LotteON/js/admin/Admin_product.js"></script>
+    <script src="/LotteON/js/admin/Admin_Cs.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/LotteON/css/admin.css">
+</head>
+<body>
+    <div id="admin-wrapper">
+        <header>
+            <div>
+                <a th:href="@{/admin/layout/index/layoutindex}" class="logo"><img src="/LotteON/images/admin_logo.png" alt="admin_logo"/></a>
+                <p>
+                    <span>[[${#authentication.principal.user.uid}]]님 환영합니다</span>
+                    <a th:href="@{/}">HOME |</a>
+                    <a th:href="@{/member/logout}">로그아웃 |</a>
+                    <a th:href="@{/cs}">고객센터</a>
+                </p>
+            </div>
+        </header>
+        <main>
+            <aside>
+                <!-- Global Navigation Bar -->
+                <ul id="gnb">
+                    <li>
+                        <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
+                        <ol>
+                            <li><a th:href="@{/admin/layout/config/info}">기본환경정보</a></li>
+                            <li><a th:href="@{/admin/layout/config/banner}">배너관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
+                        <ol>
+                            <li><a th:href="@{/admin/layout/store/seller}">판매자현황</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
+                        <ol>
+                            <li><a th:href="@{/admin/layout/user/userlist}">회원현황</a></li>
+                            <li><a href="#">포인트관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
+                        <ol>
+                            <li><a th:href="@{/admin/layout/product/productlist}">상품현황</a></li>
+                            <li><a th:href="@{/admin/layout/product/register}">상품등록</a></li>
+                            <li><a href="#">재고관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
+                        <ol>
+                            <li><a href="#">주문현황</a></li>
+                            <li><a href="#">매출현황</a></li>
+                            <li><a href="#">결제관리</a></li>
+                            <li><a href="#">배송관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
+                        <ol>
+                            <li><a th:href="@{/admin/layout/cs/noticelist(group=1)}">공지사항</a></li>
+                            <li><a th:href="@{/admin/layout/cs/faqlist(group=2)}">자주묻는질문</a></li>
+                            <li><a th:href="@{/admin/layout/cs/qnalist(group=3)}">고객문의</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </aside>
+				<section layout:fragment="content"></section>
+        </main>
+        <footer>
+            <div>
+                <p>Copyright ©kmarket.co.kr All rights reserved. KMARKET ADMINISTRATOR Version 5.4.1.2</p>
+            </div>
+        </footer>
+    </div>    
+</body>
+</html>

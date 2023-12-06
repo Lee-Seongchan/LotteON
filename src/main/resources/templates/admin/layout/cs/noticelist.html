@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/admin/index.html">
+      <head>
+      <script>
+		  $(document).ready(function(){
+		  	document.querySelector('#boardCate1').addEventListener('change', function () {
+			    var selectedCate1 = document.querySelector('#boardCate1').value;
+			    window.location.href = `/admin/layout/cs/noticelist?cate1=${selectedCate1}`;
+				 
+			});
+		  });
+	  </script>
+      </head>
+ 	<section id="admin-cs-list" layout:fragment="content">
+        <nav>
+            <h3>공지사항</h3>
+            <p>
+                HOME > 고객센터 > <strong>공지사항</strong>
+            </p>
+        </nav>
+        <section>
+            <div>
+                <!-- type1은 회원게시판에서 클릭했을 시 회원으로 설정되게끔. -->
+				<select name="cate1" id="boardCate1">
+					<option value="0">1차 선택</option>
+						<option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:selected="${cate1 eq selectedCate1}" th:text="${cate1.cate1_name}"></option>
+				</select>
+            </div>
+            <table>
+                <tr>
+                    <th><input type="checkbox" name="all"></th>
+                    <th>번호</th>
+                    <th>유형</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                    <th>관리</th>
+                </tr>
+			
+				<tr class="row" th:each="noticelist : ${noticelist}">
+                    <td style="text-align:center; width:10%"><input type="checkbox" name="chk"></td>
+                    <td style="text-align:center; width:10%">[[${noticelist.no}]]</td>
+                     <td style="text-align:center; width:10%">[[${noticelist.notice_cate1_name}]]</td>
+                    <td style="text-align:center; width:40%"><a th:href="@{/admin/layout/cs/noticeview(no=${noticelist.no})}">[[${noticelist.title}]]</a></td>
+                   	<td style="text-align:center; width:10%">[[${#temporals.format(noticelist.rdate, 'yy-MM-dd')}]]</td>
+                    <td style="text-align:center; width:20%">
+						<a th:href="@{/admin/layout/cs/noticemodify(no=${noticelist.no})}" class="noticeModify">[수정]</a>
+                        <a href="#" class="noticeDelete">[삭제]</a>
+                    </td>                   
+                </tr>
+                </c:forEach>
+            </table>
+            
+            <input type="button" value="선택 삭제" class="csDelete"/>
+            <input type="button" value="공지 작성" class="noticeWrite"/>
+			
+			<div class="paging">
+		        <span th:if="${pageStartNum > 1}">
+		            <a th:href="@{/admin/layout/cs/noticelist(pg=${pageStartNum - 1})}" class="prev">이전</a>
+		        </span>
+		        <span th:each="page : ${#numbers.sequence(1, totalPages)}" th:class="num">
+		            <a th:href="@{/admin/layout/cs/noticelist(pg=${page})}" th:text="${page}"></a>
+		        </span>
+		        <span th:if="${pageEndNum < totalPages}">
+		            <a th:href="@{/admin/layout/cs/noticelist(pg=${pageEndNum + 1})}">다음</a>
+		        </span>
+			</div>
+
+        </section>
+        
+    </section>
+</html>

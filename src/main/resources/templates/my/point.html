@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<th:block th:insert="/my/_header.html"/>
+<div class="point">
+				<ul>
+                    <span class="menu_else"></span>
+                    <li class="on"><a th:href="@{/my/order}">전체주문내역</a></li>
+                    <!--<li><a href="#">관심상품</a></li>-->
+                    <li><a th:href="@{/my/point}">포인트내역</a></li>
+                    <li><a th:href="@{/my/coupon}">쿠폰</a></li>
+                    <li><a th:href="@{/my/review}">나의리뷰</a></li>
+                    <li><a th:href="@{/my/qna}">문의하기</a></li>
+                    <li><a th:href="@{/my/info}">나의설정</a></li>
+                </ul>
+	<section>
+		
+            <a href="#"><img src="../images/my_banner1.jpg" alt="패션, 타운 하나로 끝" class="banner"></a>
+            <article>
+                <h3>포인트내역</h3>
+
+                <div class="byDate">
+                    <span class="tit">기간별조회</span>                            
+                    <ul class="date_3ea">
+                        <li><a href="#" class="date"><em>1</em>주일</a></li>
+                        <li><a href="#" class="date"><em>15</em>일</a></li>
+                        <li><a href="#" class="date"><em>1</em>개월</a></li>
+                    </ul>
+                    <ul class="date_5ea">
+                        <li><a href="#" class="date"><em>11</em>월</a></li>
+                        <li><a href="#" class="date"><em>10</em>월</a></li>
+                        <li><a href="#" class="date"><em>9</em>월</a></li>
+                        <li><a href="#" class="date"><em>8</em>월</a></li>
+                        <li><a href="#" class="date"><em>7</em>월</a></li>
+                    </ul>
+                    <p>
+                        <input type="date" name="begin"><span>~</span><input type="date" name="end">
+                    </p>
+                    <button class="btnConfirm btnPointConfirm">조회하기</button>
+                </div>
+
+                <table border="0">
+                    <tr>
+                        <th>날짜</th>
+                        <th>구분</th>
+                        <th>주문번호</th>                                
+                        <th>적립금액</th>
+                        <th>비고</th>
+                        <th>유효기간</th>
+                    </tr>
+                    <tr th:each="list:${dto.dtoList}">
+                        <td class="date">[[${#temporals.format(list.pointDate, 'yyyy-MM-dd')}]]</td>
+                        <td class="type">적립</td>
+                        <td class="ordNo">[[${list.order.ordNo}]]</td>                                
+                        <td class="point">[[${list.point}]] </td>
+                        <td class="desc">[[${list.type}]]</td>
+                        <td class="expire" th:text="${#temporals.format(list.pointDate.plusYears(1), 'yyyy-MM-dd')}"></td>
+                    </tr>
+                   
+                    
+                </table>
+
+                <p class="page">
+			    <th:block th:if="${dto.prev}"class="prev">
+			      <a th:href="@{/my/order(pg=${dto.start - 1})}"><&nbsp;이전</a>
+			    </th:block>
+			   
+			       <th:block th:each="num: ${#numbers.sequence(dto.start,dto.end)}" >
+			            <a th:href="@{/my/order(pg=${num})}" th:class="${num == dto.pg} ? 'on':''">[[${num}]]</a>
+			        </th:block>
+			 
+			    <th:block th:if="${dto.next}"class="next">
+			      <a th:href="@{/my/order(pg=${dto.end + 1)}">다음&nbsp;></a>
+			    </th:block>
+		  </p>
+
+            </article>                  
+        </section>
+<th:block th:insert="/my/_footer.html"/>       
+</html>
