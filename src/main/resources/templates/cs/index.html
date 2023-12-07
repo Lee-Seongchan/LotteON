@@ -55,7 +55,7 @@
                     <h1>공지사항<a th:href="@{/cs/list(group=1,cate1=0)}">전체보기</a></h1>
                     <ul th:each="article:${noticeArticles}">  
                         <li>
-                            <a th:href="@{/cs/view(group=2,cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" class="title">[안내] [[${article.title}]]</a>
+                            <a th:href="@{/cs/view(group=1,cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" class="title">[안내] [[${article.title}]]</a>
                             <span class="date" th:text="${#temporals.format(article.rdate, 'yy-MM-dd')}"></span>
                         </li>
                     </ul>
