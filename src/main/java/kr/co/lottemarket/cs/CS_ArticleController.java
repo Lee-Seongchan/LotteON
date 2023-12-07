@@ -30,12 +30,10 @@ public class CS_ArticleController {
 	@Autowired
 	private CsSerivce articleSerivce;
 
-
 	@GetMapping("/cs/list")
 	public String noticeList(Model model, PageRequestDTO pageRequestDTO, int group, int cate1) {
 		
-		if(pageRequestDTO.getGroup() != 2 ) {
-			
+		if(pageRequestDTO.getGroup() != 2 ) {			
 			PageResponseDTO pageResponseDTO = new PageResponseDTO(pageRequestDTO, null, 0); // 초기화
 			
 			if(pageResponseDTO.getCate1() == 0) {
