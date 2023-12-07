@@ -11,6 +11,8 @@ public interface ArticleMapper {
 	
 	public List<ArticleDTO> selectArticles(int group,int cate1);
 	
+	public List<ArticleDTO> selectFaqArticles(int group,int cate1, int cate2);
+	
 	public List<ArticleDTO> selectCate1(int group);
 	
 	public List<ArticleDTO> selectIndex(int group);

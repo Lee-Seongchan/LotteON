@@ -57,6 +57,12 @@ public class CsSerivce {
 		  return mapper.selectArticles(group, cate1);
 	 }
 	  
+	public List<ArticleDTO> selectFaqArticles(int group,int cate1, int cate2){
+		return mapper.selectFaqArticles(group, cate1, cate2);
+	}
+
+	  
+	  
 	//faq카테고리 출력
 	  public List<ArticleDTO> selectCate1(int group){
 		  return mapper.selectCate1(group);
